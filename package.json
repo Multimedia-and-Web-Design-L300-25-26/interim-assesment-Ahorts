@@ -1,0 +1,29 @@
+{
+  "name": "interim-assesment-ahorts",
+  "version": "1.0.0",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/bMYWKvYv) # Interim Assessment: Full-Stack Integration – Coinbase Clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Multimedia-and-Web-Design-L300-25-26/interim-assesment-Ahorts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Multimedia-and-Web-Design-L300-25-26/interim-assesment-Ahorts/issues"
+  },
+  "homepage": "https://github.com/Multimedia-and-Web-Design-L300-25-26/interim-assesment-Ahorts#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.4.1"
+  }
+}

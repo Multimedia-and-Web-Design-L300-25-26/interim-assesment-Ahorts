@@ -3,17 +3,18 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./src/config/db");
 
+// Load environment variables and connect to DB
 dotenv.config();
-
 connectDB();
 
 const app = express();
 
-// Middleware stuff
 app.use(cors());
 app.use(express.json());
 
-// Basic Route
+app.use("/", require("./src/routes/authRoutes"));
+app.use("/crypto", require("./src/routes/cryptoRoutes"));
+
 app.get("/", (_req, res) => {
   res.send("Ahorts Crypto Clone API is running...");
 });

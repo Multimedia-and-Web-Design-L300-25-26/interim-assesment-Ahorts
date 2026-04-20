@@ -64,6 +64,24 @@ exports.getNewListings = async (req, res) => {
   }
 };
 
+exports.getCryptoBySymbol = async (req, res) => {
+  try {
+    const { symbol } = req.params;
+    const crypto = await Crypto.findOne({ symbol: symbol.toUpperCase() });
+
+    if (!crypto) {
+      return res.status(404).json({ status: 'fail', message: 'Crypto not found' });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: { crypto },
+    });
+  } catch (error) {
+    res.status(400).json({ status: 'fail', message: error.message });
+  }
+};
+
 exports.addCrypto = async (req, res) => {
   try {
     const { name, symbol, price, image, change24h, currency } = req.body;

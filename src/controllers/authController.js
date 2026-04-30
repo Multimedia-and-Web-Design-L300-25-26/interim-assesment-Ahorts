@@ -92,3 +92,40 @@ exports.getProfile = async (req, res) => {
     res.status(400).json({ status: "fail", message: error.message });
   }
 };
+
+exports.updatePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    // 1) Get user from collection
+    const user = await User.findById(req.user.id).select("+password");
+
+    // 2) Check if posted current password is correct
+    if (!(await bcrypt.compare(currentPassword, user.password))) {
+      return res.status(401).json({ message: "Your current password is wrong" });
+    }
+
+    // 3) If correct, update password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    await user.save();
+
+    // 4) Log user in, send JWT
+    const token = signToken(user._id);
+
+    res.status(200).json({
+      status: "success",
+      token,
+      data: {
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          preferredCurrency: user.preferredCurrency,
+        },
+      },
+    });
+  } catch (error) {
+    res.status(400).json({ status: "fail", message: error.message });
+  }
+};

@@ -43,7 +43,8 @@ exports.register = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Auth Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Authentication failed. Please try again later." });
   }
 };
 
@@ -77,7 +78,8 @@ exports.login = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Auth Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Authentication failed. Please try again later." });
   }
 };
 
@@ -89,7 +91,8 @@ exports.getProfile = async (req, res) => {
       data: { user },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Auth Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Authentication failed. Please try again later." });
   }
 };
 
@@ -126,6 +129,7 @@ exports.updatePassword = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Auth Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Authentication failed. Please try again later." });
   }
 };

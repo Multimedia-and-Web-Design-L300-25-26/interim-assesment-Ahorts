@@ -23,7 +23,8 @@ exports.getAllCrypto = async (req, res) => {
       data: { cryptos: formatted },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Crypto Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Failed to process request. Please try again later." });
   }
 };
 
@@ -42,7 +43,8 @@ exports.getGainers = async (req, res) => {
       data: { cryptos: formatted },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Crypto Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Failed to process request. Please try again later." });
   }
 };
 
@@ -60,25 +62,30 @@ exports.getNewListings = async (req, res) => {
       data: { cryptos: formatted },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Crypto Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Failed to process request. Please try again later." });
   }
 };
 
 exports.getCryptoBySymbol = async (req, res) => {
   try {
     const { symbol } = req.params;
+    const currency = req.query.currency || "USD";
     const crypto = await Crypto.findOne({ symbol: symbol.toUpperCase() });
 
     if (!crypto) {
-      return res.status(404).json({ status: 'fail', message: 'Crypto not found' });
+      return res.status(404).json({ status: "fail", message: "Crypto not found" });
     }
 
+    const formatted = formatCoin(crypto, currency);
+
     res.status(200).json({
-      status: 'success',
-      data: { crypto },
+      status: "success",
+      data: { crypto: formatted },
     });
   } catch (error) {
-    res.status(400).json({ status: 'fail', message: error.message });
+    console.error("Crypto Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Failed to process request. Please try again later." });
   }
 };
 
@@ -105,6 +112,7 @@ exports.addCrypto = async (req, res) => {
       data: { crypto: newCrypto },
     });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: error.message });
+    console.error("Crypto Controller Error:", error);
+    res.status(400).json({ status: "fail", message: "Failed to process request. Please try again later." });
   }
 };
